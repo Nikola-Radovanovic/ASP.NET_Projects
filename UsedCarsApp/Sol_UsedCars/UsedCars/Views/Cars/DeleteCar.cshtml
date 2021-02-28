@@ -1,0 +1,17 @@
+﻿@model UsedCars.Models.CreatedModels.Car
+@{
+    ViewBag.Title = "DeleteCar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete <strong>@Html.DisplayFor(c => c.Brand.Name) @Html.DisplayFor(c => c.Model)</strong>, @Html.DisplayNameFor(c => c.Price): <strong>@Html.DisplayFor(c => c.Price) &euro;</strong></h2>
+<hr />
+
+@using (Html.BeginForm("DeleteCar", "Cars"))
+{
+    @Html.HiddenFor(n => n.Id)
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <input type="submit" class="btn btn-danger" value="Delete" />
+    </div>
+}

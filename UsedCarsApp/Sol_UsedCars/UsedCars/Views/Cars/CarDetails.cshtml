@@ -1,0 +1,285 @@
+﻿@model UsedCars.Models.CreatedModels.Car
+@{
+    ViewBag.Title = "CarDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model == null)
+{
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <h2>Car Details</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <h3>You don't have any added cars!</h3>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-lg-10 col-md-9 col-sm-8">
+            <h2><strong>Car Details</strong></h2>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2">
+            <div class="h2">@Html.ActionLink("Update Car Information", "CarFormUpdate", "Cars", new { Id = Model.Id }, new { @class = "btn btn-primary" })</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <table class="table">
+                <thead class="bg-warning">
+                    <tr>
+                        <th class="h4"><strong>Brand & Model</strong></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-lg-3 col-md-3 col-sm-3 col-xs-offset-12">@Html.LabelFor(c => c.BrandId): @Html.DisplayFor(c => c.Brand.Name)</td>
+                        <td class="col-lg-3 col-md-3 col-sm-3 col-xs-offset-12">@Html.LabelFor(c => c.Model): @Html.DisplayFor(c => c.Model)</td>
+                        <td class="col-lg-3 col-md-3 col-sm-3 col-xs-offset-12"></td>
+                        <td class="col-lg-3 col-md-3 col-sm-3 col-xs-offset-12"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table">
+                <thead class="bg-warning">
+                    <tr>
+                        <th class="h4"><strong>Basic information</strong></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-lg-3 col-md-3 col-sm-3 col-xs-offset-12">@Html.LabelFor(c => c.YearMakeId): @Html.DisplayFor(c => c.YearMake.Year)</td>
+                        <td class="col-lg-3 col-md-3 col-sm-3 col-xs-offset-12">@Html.LabelFor(c => c.CarBodyStyleId): @Html.DisplayFor(c => c.CarBodyStyle.Type)</td>
+                        <td class="col-lg-3 col-md-3 col-sm-3 col-xs-offset-12">@Html.LabelFor(c => c.FuelId): @Html.DisplayFor(c => c.Fuel.Type)</td>
+                        <td class="col-lg-3"></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table">
+                <thead class="bg-warning">
+                    <tr>
+                        <th class="h4"><strong>Car characteristics</strong></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="col-lg-3 col-md-3 col-sm-3 col-xs-push-12">@Html.LabelFor(c => c.CubicCapacity): @Html.DisplayFor(c => c.CubicCapacity)</td>
+                        <td class="col-lg-3 col-md-3 col-sm-3 col-xs-push-12">@Html.LabelFor(c => c.HorsePower): @Html.DisplayFor(c => c.HorsePower)</td>
+                        <td class="col-lg-3 col-md-3 col-sm-3 col-xs-push-12">@Html.LabelFor(c => c.Kilometers): @Html.DisplayFor(c => c.Kilometers)</td>
+                        <td class="col-lg-3 col-md-3 col-sm-3 col-xs-push-12">@Html.LabelFor(c => c.ColorId): @Html.DisplayFor(c => c.Color.Name)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table">
+                <thead class="bg-warning">
+                    <tr>
+                        <th class="h4 "><strong>Car condition</strong></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @if (Model.FirstOwner is true)
+                        {
+                            <td>
+                                <input type="checkbox" value="@Model.FirstOwner" checked="checked" onclick="return false" />
+                                @Html.LabelFor(n => n.FirstOwner)
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <input type="checkbox" value="@Model.FirstOwner" onclick="return false" />
+                                @Html.LabelFor(n => n.FirstOwner)
+                            </td>
+                        }
+
+                        @if (Model.Warranty is true)
+                        {
+                            <td>
+                                <input type="checkbox" value="@Model.Warranty" checked="checked" onclick="return false" />
+                                @Html.LabelFor(n => n.Warranty)
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <input type="checkbox" value="@Model.Warranty" onclick="return false" />
+                                @Html.LabelFor(n => n.Warranty)
+                            </td>
+                        }
+
+                        @if (Model.Garaged is true)
+                        {
+                            <td>
+                                <input type="checkbox" value="@Model.Garaged" checked="checked" onclick="return false" />
+                                @Html.LabelFor(n => n.Garaged)
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <input type="checkbox" value="@Model.Garaged" onclick="return false" />
+                                @Html.LabelFor(n => n.Garaged)
+                            </td>
+                        }
+
+                        @if (Model.ServiceBook is true)
+                        {
+                            <td>
+                                <input type="checkbox" value="@Model.ServiceBook" checked="checked" onclick="return false" />
+                                @Html.LabelFor(n => n.ServiceBook)
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <input type="checkbox" value="@Model.ServiceBook" onclick="return false" />
+                                @Html.LabelFor(n => n.ServiceBook)
+                            </td>
+                        }
+                    </tr>
+                    <tr>
+                        @if (Model.SpareKey is true)
+                        {
+                            <td class="col-lg-3 col-md-3 col-sm-4">
+                                <input type="checkbox" value="@Model.SpareKey" checked="checked" onclick="return false" />
+                                @Html.LabelFor(n => n.SpareKey)
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <input type="checkbox" value="@Model.SpareKey" onclick="return false" />
+                                @Html.LabelFor(n => n.SpareKey)
+                            </td>
+                        }
+
+                        @if (Model.Restaurated is true)
+                        {
+                            <td class="col-lg-3 col-md-3 col-sm-4">
+                                <input type="checkbox" value="@Model.Restaurated" checked="checked" onclick="return false" />
+                                @Html.LabelFor(n => n.Restaurated)
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="col-lg-3 col-md-3 col-sm-4">
+                                <input type="checkbox" value="@Model.Restaurated" onclick="return false" />
+                                @Html.LabelFor(n => n.Restaurated)
+                            </td>
+                        }
+
+                        @if (Model.Oldtimer is true)
+                        {
+                            <td class="col-lg-3 col-md-3 col-sm-4">
+                                <input type="checkbox" value="@Model.Oldtimer" checked="checked" onclick="return false" />
+                                @Html.LabelFor(n => n.Oldtimer)
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="col-lg-3 col-md-3 col-sm-4">
+                                <input type="checkbox" value="@Model.Oldtimer" onclick="return false" />
+                                @Html.LabelFor(n => n.Oldtimer)
+                            </td>
+                        }
+
+                        @if (Model.AdaptedForTheDisabled is true)
+                        {
+                            <td class="col-lg-3 col-md-3 col-sm-4">
+                                <input type="checkbox" value="@Model.AdaptedForTheDisabled" checked="checked" onclick="return false" />
+                                @Html.LabelFor(n => n.AdaptedForTheDisabled)
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="col-lg-3 col-md-3 col-sm-4">
+                                <input type="checkbox" value="@Model.AdaptedForTheDisabled" onclick="return false" />
+                                @Html.LabelFor(n => n.AdaptedForTheDisabled)
+                            </td>
+                        }
+                    </tr>
+                    <tr>
+                        @if (Model.TaxiCar is true)
+                        {
+                            <td class="col-lg-3 col-md-3 col-sm-4">
+                                <input type="checkbox" value="@Model.TaxiCar" checked="checked" onclick="return false" />
+                                @Html.LabelFor(n => n.TaxiCar)
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="col-lg-3 col-md-3 col-sm-4">
+                                <input type="checkbox" value="@Model.TaxiCar" onclick="return false" />
+                                @Html.LabelFor(n => n.TaxiCar)
+                            </td>
+                        }
+
+                        @if (Model.TestCar is true)
+                        {
+                            <td class="col-lg-3 col-md-3 col-sm-4">
+                                <input type="checkbox" value="@Model.TestCar" checked="checked" onclick="return false" />
+                                @Html.LabelFor(n => n.TestCar)
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="col-lg-3 col-md-3 col-sm-4">
+                                <input type="checkbox" value="@Model.TestCar" onclick="return false" />
+                                @Html.LabelFor(n => n.TestCar)
+                            </td>
+                        }
+
+                        @if (Model.Tuning is true)
+                        {
+                            <td class="col-lg-3 col-md-3 col-sm-4">
+                                <input type="checkbox" value="@Model.Tuning" checked="checked" onclick="return false" />
+                                @Html.LabelFor(n => n.Tuning)
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="col-lg-3 col-md-3 col-sm-4">
+                                <input type="checkbox" value="@Model.Tuning" onclick="return false" />
+                                @Html.LabelFor(n => n.Tuning)
+                            </td>
+                        }
+
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table">
+                <thead class="bg-warning">
+                    <tr>
+                        <th class="h4"><strong>Price</strong></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Html.LabelFor(c => c.Price): @Html.DisplayFor(c => c.Price)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

@@ -1,0 +1,201 @@
+﻿@model UsedCars.ViewModels.CarFormViewModel
+@{
+    ViewBag.Title = "CarFormCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>New Car</h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-lg-10">
+        @using (Html.BeginForm("CreateOrUpdateCar", "Cars"))
+        {
+            <h3>Brand & Model</h3>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(n => n.Car.BrandId)
+                        @Html.DropDownListFor(n => n.Car.BrandId,
+                                              new SelectList(Model.Brands, "Id", "Name"),
+                                              "-- Select Car Brand --",
+                                              new { @class = "form-control" })
+                        @Html.ValidationMessageFor(n => n.Car.BrandId)
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(n => n.Car.Model)
+                        @Html.TextBoxFor(n => n.Car.Model, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(n => n.Car.Model)
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-3"></div>
+            </div>
+            <hr />
+            <h3>Basic information</h3>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(n => n.Car.YearMakeId)
+                        @Html.DropDownListFor(n => n.Car.YearMakeId,
+                                              new SelectList(Model.YearMakes, "Id", "Year"),
+                                              "-- Select Year Make --",
+                                              new { @class = "form-control" })
+                        @Html.ValidationMessageFor(n => n.Car.YearMakeId)
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(n => n.Car.CarBodyStyleId)
+                        @Html.DropDownListFor(n => n.Car.CarBodyStyleId,
+                                              new SelectList(Model.CarBodyStyles, "Id", "Type"),
+                                              "-- Select Car Body --",
+                                              new { @class = "form-control" })
+                        @Html.ValidationMessageFor(n => n.Car.CarBodyStyleId)
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(n => n.Car.FuelId)
+                        @Html.DropDownListFor(n => n.Car.FuelId,
+                                              new SelectList(Model.Fuels, "Id", "Type"),
+                                              "-- Select Fuel Type --",
+                                              new { @class = "form-control" })
+                        @Html.ValidationMessageFor(n => n.Car.FuelId)
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+            <hr />
+            <h3>Car characteristics</h3>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(n => n.Car.CubicCapacity)
+                        @Html.TextBoxFor(n => n.Car.CubicCapacity, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(n => n.Car.CubicCapacity)
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(n => n.Car.HorsePower)
+                        @Html.TextBoxFor(n => n.Car.HorsePower, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(n => n.Car.HorsePower)
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(n => n.Car.Kilometers)
+                        @Html.TextBoxFor(n => n.Car.Kilometers, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(n => n.Car.Kilometers)
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(n => n.Car.ColorId)
+                        @Html.DropDownListFor(n => n.Car.ColorId,
+                                              new SelectList(Model.Colors, "Id", "Name"),
+                                              "-- Select Color --",
+                                              new { @class = "form-control" })
+                        @Html.ValidationMessageFor(n => n.Car.ColorId)
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <h3>Car condition</h3>
+            <div class="row">
+                <div class="col-lg-3">
+                    @Html.CheckBoxFor(n => n.Car.FirstOwner)
+                    @Html.LabelFor(n => n.Car.FirstOwner)
+                    @Html.ValidationMessageFor(n => n.Car.FirstOwner)
+                </div>
+                <div class="col-lg-3">
+                    @Html.CheckBoxFor(n => n.Car.Warranty)
+                    @Html.LabelFor(n => n.Car.Warranty)
+                    @Html.ValidationMessageFor(n => n.Car.Warranty)
+                </div>
+                <div class="col-lg-3">
+                    @Html.CheckBoxFor(n => n.Car.Garaged)
+                    @Html.LabelFor(n => n.Car.Garaged)
+                    @Html.ValidationMessageFor(n => n.Car.Garaged)
+                </div>
+                <div class="col-lg-3">
+                    @Html.CheckBoxFor(n => n.Car.ServiceBook)
+                    @Html.LabelFor(n => n.Car.ServiceBook)
+                    @Html.ValidationMessageFor(n => n.Car.ServiceBook)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    @Html.CheckBoxFor(n => n.Car.SpareKey)
+                    @Html.LabelFor(n => n.Car.SpareKey)
+                    @Html.ValidationMessageFor(n => n.Car.SpareKey)
+                </div>
+                <div class="col-lg-3">
+                    @Html.CheckBoxFor(n => n.Car.Restaurated)
+                    @Html.LabelFor(n => n.Car.Restaurated)
+                    @Html.ValidationMessageFor(n => n.Car.Restaurated)
+                </div>
+                <div class="col-lg-3">
+                    @Html.CheckBoxFor(n => n.Car.Oldtimer)
+                    @Html.LabelFor(n => n.Car.Oldtimer)
+                    @Html.ValidationMessageFor(n => n.Car.Oldtimer)
+                </div>
+                <div class="col-lg-3">
+                    @Html.CheckBoxFor(n => n.Car.AdaptedForTheDisabled)
+                    @Html.LabelFor(n => n.Car.AdaptedForTheDisabled)
+                    @Html.ValidationMessageFor(n => n.Car.AdaptedForTheDisabled)
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    @Html.CheckBoxFor(n => n.Car.TaxiCar)
+                    @Html.LabelFor(n => n.Car.TaxiCar)
+                    @Html.ValidationMessageFor(n => n.Car.TaxiCar)
+                </div>
+                <div class="col-lg-3">
+                    @Html.CheckBoxFor(n => n.Car.TestCar)
+                    @Html.LabelFor(n => n.Car.TestCar)
+                    @Html.ValidationMessageFor(n => n.Car.TestCar)
+                </div>
+                <div class="col-lg-3">
+                    @Html.CheckBoxFor(n => n.Car.Tuning)
+                    @Html.LabelFor(n => n.Car.Tuning)
+                    @Html.ValidationMessageFor(n => n.Car.Tuning)
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+            <hr />
+            <h3>Car Price</h3>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.LabelFor(n => n.Car.Price)
+                        @Html.TextBoxFor(n => n.Car.Price, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(n => n.Car.Price)
+                    </div>
+                </div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-3"></div>
+                <div class="col-lg-3"></div>
+            </div>
+            @Html.HiddenFor(n => n.Car.Id)
+            @Html.AntiForgeryToken()
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="Add Car" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

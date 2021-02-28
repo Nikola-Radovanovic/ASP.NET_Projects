@@ -1,0 +1,127 @@
+﻿@model IEnumerable<UsedCars.Models.CreatedModels.Client>
+@{
+    ViewBag.Title = "AllClients";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-10">
+        <h2><strong>Clients</strong></h2>
+    </div>
+    <div class="col-lg-2">
+        <h2>@Html.ActionLink("Ad new client", "ClientFormCreate", "Clients", new { @class = "btn btn-success" })</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <table id="clients" class="table table-hover">
+            <thead class="bg-primary">
+                <tr>
+                    <th>Name</th>
+                    <th>Lastname</th>
+                    <th>Address</th>
+                    <th>ZIP</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>Phone</th>
+                    <th class="col-lg-1"></th>
+                    <th class="col-lg-1"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @*@foreach (var client in Model)
+                {
+                    <tr>
+                        <td class="text-center">@client.Name</td>
+                        <td class="text-center">@client.LastName</td>
+                        <td class="text-center">@client.Address</td>
+                        <td class="text-center">@client.PostalCode</td>
+                        <td class="text-center">@client.City</td>
+                        <td class="text-center">@client.Country</td>
+                        <td class="text-center">@client.Phone</td>
+                        <td class="col-lg-2 text-center">
+                            @Html.ActionLink("Update", "UpdateClient", "Clients", new { Id = client.Id }, new { @class = "btn btn-success" })
+                            @Html.ActionLink("Delete", "DeleteClient", "Clients", new { Id = client.Id }, new { @class = "btn btn-danger" })
+                            <button data-client-id="@client.Id" class="btn btn-danger js-delete">Delete</button>
+                        </td>
+                    </tr>
+                }*@
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts                                      
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#clients").DataTable({
+                ajax: {
+                    url: "/api/clients",
+                    dataSrc: ""
+                },
+                columns: [
+                    {
+                        data: "name"
+                    },
+                    {
+                        data: "lastName"
+                    },
+                    {
+                        data: "address"
+                    },
+                    {
+                        data: "postalCode"
+                    },
+                    {
+                        data: "city"
+                    },
+                    {
+                        data: "country"
+                    },
+                    {
+                        data: "phone"
+                    },
+                    {
+                        data: "id",
+                        render: function (data, type, client) {
+                            return "<a href='/clients/ClientFormUpdate/" + client.id + "'><div class='btn btn-primary'>Update</div></a>";
+                        }
+                    },
+                    {
+                        data: "id",
+                        render: function (data, type, client) {
+                            return "<button class='btn btn-danger js-delete' data-client-id=" + client.id + ">Delete</button>";
+                        }
+                    }
+                ]
+            });
+
+            $("#clients").on("click", ".js-delete", function () {
+                var button = $(this);
+                bootbox.confirm("Do you want to delete client?", function (result) {
+                    if (result) {
+                        $.ajax({
+                            url: "/api/clients/" + button.attr("data-client-id"),
+                            method: "DELETE",
+                            success: function () {
+                                table.row(button.parents("tr")).remove().draw();
+                            }
+                        });
+                    }
+                });
+            });
+
+            $("clients").on("click", ".js-update", function () {
+                var button = $(this);
+                $.ajax({
+                    url: "/api/UpdateClient/" + button.attr("data-client-id"),
+                    method: "PUT",
+                    success: function () {
+
+                    }
+                })
+            });
+        });
+    </script>
+}

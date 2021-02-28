@@ -1,0 +1,32 @@
+﻿@model UsedCars.Models.CreatedModels.Ad
+@{
+    ViewBag.Title = "AdFormUpdate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2><strong>@Html.DisplayFor(a => a.Car.Brand.Name) @Html.DisplayFor(a => a.Car.Model), @Html.DisplayNameFor(a => a.DatePosted): @Html.DisplayFor(a => a.DatePosted)</strong></h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-lg-12">
+        @using (Html.BeginForm("CreateOrUpdateAd", "Ads"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(n => n.Description)
+                @Html.TextBoxFor(n => n.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(n => n.Description)
+            </div>
+            @Html.HiddenFor(n => n.Id)
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="Update Ad" />
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

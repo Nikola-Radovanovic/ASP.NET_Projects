@@ -1,0 +1,50 @@
+﻿@model IEnumerable<UsedCars.Models.CreatedModels.Ad>
+
+@{
+    ViewBag.Title = "AllAds";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2><strong>Car Ads</strong></h2>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <table id="ads" class="table table-hover">
+            <thead class="bg-primary">
+                <tr>
+                    <th class="text-center">Client</th>
+                    <th class="text-center">Title</th>
+                    <th class="text-center">Price</th>
+                    <th class="text-center">Date Posted</th>
+                    <th class="col-lg-1"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ad in Model)
+                {
+                    <tr>
+                        <td class="text-center">@ad.Client.Name @ad.Client.LastName</td>
+                        <td class="text-center">@ad.Car.Brand.Name @ad.Car.Model</td>
+                        <td class="text-center">@ad.Car.Price &euro;</td>
+                        <td class="text-center">@ad.DatePosted.ToString("D")</td>
+                        <td>
+                            @Html.ActionLink("Details", "AdDetails", "Ads", new { Id = ad.Id }, new { @class = "btn btn-warning" })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#ads').DataTable();
+        });
+    </script>
+}

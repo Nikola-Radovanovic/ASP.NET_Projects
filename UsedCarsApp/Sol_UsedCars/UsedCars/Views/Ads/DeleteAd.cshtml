@@ -1,0 +1,19 @@
+﻿@model UsedCars.Models.CreatedModels.Ad
+@{
+    ViewBag.Title = "DeleteAd";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete Ad: <strong>@Html.DisplayFor(a => a.Car.Brand.Name) @Html.DisplayFor(a => a.Car.Model)</strong>, Posted: <strong>@Html.DisplayFor(a => a.DatePosted)</strong></h2>
+<hr />
+
+@using (Html.BeginForm("DeleteAd", "Ads"))
+{
+    @Html.HiddenFor(n => n.ClientId)
+    @Html.HiddenFor(n => n.CarId)
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <input type="submit" class="btn btn-danger" value="Delete Ad" />
+    </div>
+}
+

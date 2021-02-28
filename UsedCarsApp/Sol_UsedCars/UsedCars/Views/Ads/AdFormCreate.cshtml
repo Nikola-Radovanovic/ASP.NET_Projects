@@ -1,0 +1,49 @@
+﻿@model UsedCars.ViewModels.AdFormViewModel
+@{
+    ViewBag.Title = "AdFormCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2><strong>New Ad</strong></h2>
+
+<hr />
+
+<div class="row">
+    <div class="col-lg-12">
+        @using (Html.BeginForm("CreateOrUpdateAd", "Ads"))
+        {
+            <div class="form-group">
+                @Html.LabelFor(n => n.Ad.ClientId)
+                @Html.DropDownListFor(n => n.Ad.ClientId,
+                                      new SelectList(Model.Clients, "Id", "Lastname"),
+                                      "-- Select Client --",
+                                      new { @class = "form-control" })
+                @Html.ValidationMessageFor(n => n.Ad.ClientId)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(n => n.Ad.CarId)
+                @Html.DropDownListFor(n => n.Ad.CarId,
+                                      new SelectList(Model.Cars, "Id", "Model"),
+                                      "-- Select Car --",
+                                      new { @class = "form-control" })
+                @Html.ValidationMessageFor(n => n.Ad.CarId)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(n => n.Ad.Description)
+                @Html.TextBoxFor(n => n.Ad.Description, new { @class = "form-control" })
+                @Html.ValidationMessageFor(n => n.Ad.Description)
+            </div>
+            @Html.HiddenFor(n => n.Ad.ClientId)
+            @Html.HiddenFor(n => n.Ad.CarId)
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <input type="submit" class="btn btn-success" value="Create Ad" />
+            </div>
+        }
+    </div>
+</div>
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+}

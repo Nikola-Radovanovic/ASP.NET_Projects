@@ -1,0 +1,75 @@
+﻿@model IEnumerable<UsedCars.Models.CreatedModels.Car>
+@{
+    ViewBag.Title = "AllCars";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model == null)
+{
+    <div class="row">
+        <div class="col-lg-10">
+            <h2>Cars</h2>
+        </div>
+        <div class="col-lg-2">
+            <h2>@Html.ActionLink("Add new car", "CarFormCreate", "Cars", new { @class = "btn btn-success" })</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>You don't have any added cars!</h3>
+        </div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-lg-10">
+            <h2><strong>Cars</strong></h2>
+        </div>
+        <div class="col-lg-2">
+            <h2>@Html.ActionLink("Add new car", "CarFormCreate", "Cars", new { @class = "btn btn-success" })</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="cars" class="table table-hover">
+                <thead class="bg-primary">
+                    <tr>
+                        <th class="text-center"></th>
+                        <th class="text-center">Brand</th>
+                        <th class="text-center">Model</th>
+                        <th class="text-center">Year make</th>
+                        <th class="text-center">Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var car in Model)
+                    {
+                        <tr>
+                            <td class="col-lg-1 text-center">
+                                @Html.ActionLink("Details", "CarDetails", "Cars", new { Id = car.Id }, new { @class = "btn btn-warning" })
+                            </td>
+                            <td class="text-center">@car.Brand.Name</td>
+                            <td class="text-center">@car.Model</td>
+                            <td class="text-center">@car.YearMake.Year</td>
+                            <td class="text-center">@car.Price &euro;</td>
+                            <td class="col-lg-1 text-center">
+                                @Html.ActionLink("Delete", "DeleteCar", "Cars", new { Id = car.Id }, new { @class = "btn btn-danger" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            $('#cars').DataTable();
+        });
+    </script>
+}

@@ -1,0 +1,17 @@
+﻿@model UsedCars.Models.CreatedModels.Client
+@{
+    ViewBag.Title = "DeleteClient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete client: <strong>@Model.Name @Model.LastName</strong></h2>
+<hr />
+
+@using (Html.BeginForm("DeleteClient", "Clients"))
+{
+    @Html.HiddenFor(n => n.Id)
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <input type="submit" class="btn btn-danger" value="Delete" />
+    </div>
+}
